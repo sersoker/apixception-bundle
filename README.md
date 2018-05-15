@@ -86,3 +86,4 @@ Como se ha comentado anteriormente, esta librería acepta excepciones de todo ti
  - Clase abstracta ``Pccomponentes\Apixception\Core\Exception\NotFoundException``
  - Clase abstracta ``Pccomponentes\Apixception\Core\Exception\ExistsException``
  - Clase abstracta ``Pccomponentes\Apixception\Core\Exception\LogicException``
+ 
