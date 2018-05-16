@@ -17,8 +17,8 @@ class ApixceptionDispatcher implements EventSubscriberInterface
 
     public function add(string $exception, int $httpCode, string $transformerClass): void
     {
-        $this->guard($exception);
-        $this->guard($transformerClass);
+        $this->guardIfIsClassOrInterface($exception);
+        $this->guardIfClassExists($transformerClass);
         $this->subscribers[] = new ApixceptionSubscriber(
             $exception,
             $httpCode,
@@ -47,12 +47,26 @@ class ApixceptionDispatcher implements EventSubscriberInterface
         }
     }
 
-    private function guard(string $class): void
+    private function guardIfIsClassOrInterface(string $class): void
     {
-        if (false === class_exists($class) && false === interface_exists($class)) {
+        if (false === $this->classExists($class) && false === interface_exists($class)) {
             throw new \InvalidArgumentException(
                 sprintf('%s should be a class or an interface', $class)
             );
         }
+    }
+
+    private function guardIfClassExists(string $class): void
+    {
+        if (false === $this->classExists($class)) {
+            throw new \InvalidArgumentException(
+                sprintf('%s should be a class', $class)
+            );
+        }
+    }
+
+    private function classExists(string $class): bool
+    {
+        return class_exists($class);
     }
 }
