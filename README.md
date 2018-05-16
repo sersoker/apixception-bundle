@@ -18,7 +18,7 @@ return [
   Pccomponentes\Apixception\ApixceptionBundle::class => ['all' => true]  
 ];
 ```
-4. Escribe el fichero de configuración del bundle indicando las excepciones que deseas capturar, y su transformación para generar la respuesta. Para ello, crea un archivo con nombre ``apixception.yml`` en la ruta ``config/packages``. Un ejemplo de su contenido es:
+4. Escribe el fichero de configuración del bundle indicando las excepciones que deseas capturar, y su transformación para generar la respuesta. Para ello, crea un archivo con nombre ``apixception.yaml`` en la ruta ``config/packages``. Un ejemplo de su contenido es:
 ```yaml
 apixception:  
   - exception: Pccomponentes\Apixception\Core\Exception\InvalidArgumentException  
