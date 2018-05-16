@@ -56,7 +56,7 @@ class ApixceptionDispatcher implements EventSubscriberInterface
         }
     }
 
-    private function guardIfClassExists(string $class)
+    private function guardIfClassExists(string $class): void
     {
         if (false === $this->classExists($class)) {
             throw new \InvalidArgumentException(
@@ -65,7 +65,7 @@ class ApixceptionDispatcher implements EventSubscriberInterface
         }
     }
 
-    private function classExists(string $class)
+    private function classExists(string $class): bool
     {
         return class_exists($class);
     }
