@@ -1,7 +1,7 @@
 <?php
 namespace Pccomponentes\Apixception\Core\Exception;
 
-abstract class LogicException extends NotFoundException
+abstract class LogicException extends \Exception implements SerializableException
 {
     public abstract function data(): array;
 
