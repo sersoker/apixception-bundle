@@ -7,9 +7,6 @@ abstract class LogicException extends NotFoundException
 
     public function serialice(): array
     {
-        return  [
-            'message' => $this->getMessage(),
-            'data' => $this->data()
-        ];
+        return  $this->data();
     }
 }

@@ -5,6 +5,9 @@ class SerializableTransformer extends ExceptionTransformer
 {
     public function transform(\Throwable $exception): array
     {
-        return $exception->serialice();
+        return [
+            'message' => $exception->getMessage(),
+            'data' => $exception->serialice()
+        ];
     }
 }

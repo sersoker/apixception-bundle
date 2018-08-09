@@ -3,6 +3,7 @@
   "description": "Bundle to handle and render custom exceptions in API-Style projects using symfony kernel events.",
   "type": "symfony-bundle",
   "license": "MIT",
+  "version": "1.0",
   "authors": [
     {
       "name": "Juan G. Rodríguez Carrión",

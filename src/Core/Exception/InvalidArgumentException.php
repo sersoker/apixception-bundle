@@ -7,6 +7,7 @@ class InvalidArgumentException extends \Exception implements SerializableExcepti
 
     public function __construct(InvalidArgumentError ...$errors)
     {
+        parent::__construct('Invalid argument exception');
         $this->errors = $errors;
     }
 

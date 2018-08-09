@@ -6,7 +6,7 @@ class NoSerializableTransformer extends ExceptionTransformer
     public function transform(\Throwable $exception): array
     {
         return [
-            'exception' => get_class($exception),
+            'exception' => \get_class($exception),
             'message' => $exception->getMessage()
         ];
     }
