@@ -36,6 +36,7 @@ class ApixceptionDispatcher implements EventSubscriberInterface
         $exception = $event->getException();
         foreach ($this->subscribers as $subscriber) {
             if (\is_a($exception, $subscriber->exception(), true)) {
+                $event->allowCustomResponseCode(); //Symfony disables all non 4XX status codes in kernel exception by default
                 $event->setResponse(
                     new JsonResponse(
                         $subscriber->transform($exception),
