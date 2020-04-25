@@ -1,15 +1,11 @@
 <?php
-namespace Pccomponentes\Apixception\DependencyInjection;
+declare(strict_types=1);
 
-use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+namespace PcComponentes\Apixception\DependencyInjection;
+
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-/**
- * FrameworkExtension configuration structure.
- *
- * @author Jeremy Mikola <jmikola@gmail.com>
- */
 class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
@@ -28,7 +24,7 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('transformer')
                         ->isRequired()
                         ->cannotBeEmpty()
-                        ->defaultValue('Pccomponentes\Apixception\Core\Transformer\NoSerializableTransformer')
+                        ->defaultValue('PcComponentes\Apixception\Core\Transformer\NoSerializableTransformer')
                     ->end()
                     ->integerNode('http_code')
                         ->isRequired()

@@ -1,11 +1,14 @@
 <?php
-namespace Pccomponentes\Apixception\Core\Transformer;
+declare(strict_types=1);
+
+namespace PcComponentes\Apixception\Core\Transformer;
 
 abstract class ExceptionTransformer
 {
+    abstract public function transform(\Throwable $exception): array;
+
     final public function __construct()
     {
+        // Disabled constructor
     }
-
-    public abstract function transform(\Throwable $exception): array;
 }

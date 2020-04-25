@@ -1,5 +1,7 @@
 <?php
-namespace Pccomponentes\Apixception\Core;
+declare(strict_types=1);
+
+namespace PcComponentes\Apixception\Core;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -8,7 +10,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class ApixceptionDispatcher implements EventSubscriberInterface
 {
-    private $subscribers;
+    private array $subscribers;
 
     public function __construct()
     {
@@ -22,37 +24,43 @@ class ApixceptionDispatcher implements EventSubscriberInterface
         $this->subscribers[] = new ApixceptionSubscriber(
             $exception,
             $httpCode,
-            (new \ReflectionClass($transformerClass))->newInstanceWithoutConstructor()
+            (new \ReflectionClass($transformerClass))->newInstanceWithoutConstructor(),
         );
-    }
-
-    public static function getSubscribedEvents(): array
-    {
-        return [KernelEvents::EXCEPTION => ['onKernelException']];
     }
 
     public function onKernelException(GetResponseForExceptionEvent $event): void
     {
         $exception = $event->getException();
+
         foreach ($this->subscribers as $subscriber) {
-            if (\is_a($exception, $subscriber->exception(), true)) {
-                $event->allowCustomResponseCode(); //Symfony disables all non 4XX status codes in kernel exception by default
-                $event->setResponse(
-                    new JsonResponse(
-                        $subscriber->transform($exception),
-                        $subscriber->httpCode()
-                    )
-                );
-                return;
+            if (false === \is_a($exception, $subscriber->exception(), true)) {
+                continue;
             }
+
+            $event->allowCustomResponseCode();
+            $event->setResponse(
+                new JsonResponse(
+                    $subscriber->transform($exception),
+                    $subscriber->httpCode(),
+                ),
+            );
+
+            return;
         }
+    }
+
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            KernelEvents::EXCEPTION => ['onKernelException'],
+        ];
     }
 
     private function guardIfIsClassOrInterface(string $class): void
     {
         if (false === $this->classExists($class) && false === interface_exists($class)) {
             throw new \InvalidArgumentException(
-                sprintf('%s should be a class or an interface', $class)
+                \sprintf('%s should be a class or an interface', $class),
             );
         }
     }
@@ -61,13 +69,13 @@ class ApixceptionDispatcher implements EventSubscriberInterface
     {
         if (false === $this->classExists($class)) {
             throw new \InvalidArgumentException(
-                sprintf('%s should be a class', $class)
+                \sprintf('%s should be a class', $class),
             );
         }
     }
 
     private function classExists(string $class): bool
     {
-        return class_exists($class);
+        return \class_exists($class);
     }
 }

@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace Pccomponentes\Apixception\Core\Transformer;
+namespace PcComponentes\Apixception\Core\Transformer;
 
-class JsonSerializableTransformer extends ExceptionTransformer
+final class JsonSerializableTransformer extends ExceptionTransformer
 {
     public function transform(\Throwable $exception): array
     {
         if (false === $exception instanceof \JsonSerializable) {
             throw new \InvalidArgumentException(
-                \sprintf('%s needs to be %s', self::class, \JsonSerializable::class)
+                \sprintf('%s needs to be %s', self::class, \JsonSerializable::class),
             );
         }
 
