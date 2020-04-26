@@ -1,14 +1,15 @@
 <?php
-namespace Pccomponentes\Apixception\Core;
+declare(strict_types=1);
 
-use Symfony\Component\HttpFoundation\Response;
-use Pccomponentes\Apixception\Core\Transformer\ExceptionTransformer;
+namespace PcComponentes\Apixception\Core;
 
-class ApixceptionSubscriber
+use PcComponentes\Apixception\Core\Transformer\ExceptionTransformer;
+
+final class ApixceptionSubscriber
 {
-    private $exception;
-    private $httpCode;
-    private $transformer;
+    private string $exception;
+    private int $httpCode;
+    private ExceptionTransformer $transformer;
 
     public function __construct(string $exception, int $httpCode, ExceptionTransformer $transformer)
     {
@@ -17,14 +18,14 @@ class ApixceptionSubscriber
         $this->transformer = $transformer;
     }
 
-    public function httpCode(): int
-    {
-        return $this->httpCode;
-    }
-
     public function exception(): string
     {
         return $this->exception;
+    }
+
+    public function httpCode(): int
+    {
+        return $this->httpCode;
     }
 
     public function transform(\Throwable $exception): array

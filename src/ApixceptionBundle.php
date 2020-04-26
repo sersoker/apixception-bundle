@@ -1,7 +1,8 @@
 <?php
-namespace Pccomponentes\Apixception;
+declare(strict_types=1);
 
-use Pccomponentes\Apixception\DependencyInjection\ApixceptionExtension;
+namespace PcComponentes\Apixception;
+
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
