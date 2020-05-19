@@ -8,9 +8,6 @@ Las respuestas serán en formato JSON (`Symfony\Component\HttpFoundation\JsonRes
 
 1. Descarga e instala el vendor usando [composer](https://getcomposer.org/).
 
-    ```bash
-    $ composer require pccomponentes/apixception-bundle
-    ```
 
 2. Añade el bundle en `config\bundles.php`. Por ejemplo:
 
